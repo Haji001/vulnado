@@ -28,7 +28,7 @@ pipeline {
         stage('snyk version...') {
             steps {
                 script {
-                    sh 'snyk --version'
+                    sh '/usr/local/bin/snyk --version'
                 }
             }
         }
