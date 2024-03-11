@@ -32,6 +32,9 @@ pipeline {
         }
       }
     }
+  }
+}
+// testing
 
     // stage('Testing') {
     //   steps {
