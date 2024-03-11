@@ -37,15 +37,25 @@ pipeline {
       }
     }
 
-    stage('Build Image') { // Notice the capital "I" here
+    stage('docker container') {
       steps {
-        withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com"]) {
-          script {
-            app = docker.build("test/test001")
-          }
+        script {
+          sh 'docker ps'
         }
       }
     }
   }
 }
+
+//     stage('Build Image') { // Notice the capital "I" here
+//       steps {
+//         withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com"]) {
+//           script {
+//             app = docker.build("test/test001")
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 // testing
