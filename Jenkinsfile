@@ -39,7 +39,7 @@ pipeline {
 
     stage('Build Image') { // Notice the capital "I" here
       steps {
-        withDockerRegistry(credentialsId: "dockerlogin") {
+        withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/repository/docker/ant0021/testv1/general"]) {
           script {
             sh 'docker build -t ant0021/testv1:tag321'
           }
