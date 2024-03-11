@@ -37,25 +37,14 @@ pipeline {
     //   }
     // }
 
-    stage('docker container') {
+    stage('Build Image') { // Notice the capital "I" here
       steps {
-        script {
-          sh 'docker ps'
+        withDockerRegistry(credentialsId: "dockerlogin") {
+          script {
+            sh 'docker build -t ant0021/testv1:tag321'
+          }
         }
       }
     }
   }
 }
-
-//     stage('Build Image') { // Notice the capital "I" here
-//       steps {
-//         withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com"]) {
-//           script {
-//             app = docker.build("test/test001")
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-// testing
