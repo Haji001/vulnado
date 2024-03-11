@@ -1,6 +1,6 @@
 pipeline {
     agent any
-  
+
     tools {
         maven 'MAVEN_3.9.6'
     }
@@ -20,18 +20,23 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/test001']],
-                    userRemoteConfigs: [[url: 'https://github.com/Haji001/vulnado.git']]
+                    userRemoteConfigs: [[url: 'https://github.com/Haji01/vulnado.git']]
                 ])
             }
         }
 
-        stage('snyk version...') {
+        stage('Test') {
             steps {
-                script {
-                    sh "snyk --version"
-                }
+                echo 'Testing...'
+                snykSecurity(
+                    snykInstallation: 'snyk@latest',
+                    snykTokenId: 'SNYK_TOKEN'
+                    // place other parameters here
+                )
             }
         }
+    }
+}
 
         // Testing stage (commented out)
         /*
