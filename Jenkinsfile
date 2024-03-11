@@ -25,6 +25,14 @@ pipeline {
       }
     }
 
+    stage('snyk version...'){
+      steps {
+        script {
+          sh 'snyk --version'
+        }
+      }
+    }
+
     // stage('Testing') {
     //   steps {
     //     withSonarQubeEnv(installationName: 'SonarQube Host', credentialsId: 'SONAR_TOKEN') {
@@ -37,14 +45,14 @@ pipeline {
     //   }
     // }
 
-    stage('Build Image') { // Notice the capital "I" here
-      steps {
-        withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/repository/docker/ant0021/testv1/general"]) {
-          script {
-            sh 'docker build -t ant0021/testv1:tag321'
-          }
-        }
-      }
-    }
-  }
-}
+//     stage('Build Image') { // Notice the capital "I" here
+//       steps {
+//         withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/repository/docker/ant0021/testv1/general"]) {
+//           script {
+//             sh 'docker build -t ant0021/testv1:tag321'
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
