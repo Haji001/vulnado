@@ -20,7 +20,7 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/test001']],
-                    userRemoteConfigs: [[url: 'https://github.com/Haji01/vulnado.git']]
+                    userRemoteConfigs: [[url: 'https://github.com/Haji001/vulnado.git']]
                 ])
             }
         }
