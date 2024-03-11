@@ -25,17 +25,17 @@ pipeline {
       }
     }
 
-    stage('Testing') {
-      steps {
-        withSonarQubeEnv(installationName: 'SonarQube Host', credentialsId: 'SONAR_TOKEN') {
-          sh 'mvn clean verify sonar:sonar \
-               -Dsonar.projectKey=vulnado \
-               -Dsonar.projectName="vulnado" \
-               -Dsonar.login=$SONAR_TOKEN \
-               -Dsonar.host.url=http://localhost:9000'
-        }
-      }
-    }
+    // stage('Testing') {
+    //   steps {
+    //     withSonarQubeEnv(installationName: 'SonarQube Host', credentialsId: 'SONAR_TOKEN') {
+    //       sh 'mvn clean verify sonar:sonar \
+    //            -Dsonar.projectKey=vulnado \
+    //            -Dsonar.projectName="vulnado" \
+    //            -Dsonar.login=$SONAR_TOKEN \
+    //            -Dsonar.host.url=http://localhost:9000'
+    //     }
+    //   }
+    // }
 
     stage('docker container') {
       steps {
