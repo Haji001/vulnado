@@ -25,18 +25,28 @@ pipeline {
             }
         }
 
-        stage('Test') {
+        stage('checking docker...'){
             steps {
-                echo 'Testing...'
-                snykSecurity(
-                    snykInstallation: 'snyk@latest',
-                    snykTokenId: 'snyk-api-token'
-                    // place other parameters here
-                )
+              script {
+                sh 'docker --version'
+              }
             }
         }
     }
 }
+
+//         stage('Test') {
+//             steps {
+//                 echo 'Testing...'
+//                 snykSecurity(
+//                     snykInstallation: 'snyk@latest',
+//                     snykTokenId: 'snyk-api-token'
+//                     // place other parameters here
+//                 )
+//             }
+//         }
+//     }
+// }
 
         // Testing stage (commented out)
         /*
