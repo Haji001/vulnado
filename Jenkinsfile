@@ -25,15 +25,17 @@ pipeline {
             }
         }
 
-        stage('checking docker...'){
+        stage('Run DAST Scan with ZAP') {
             steps {
               script {
-                sh 'docker --version'
+                zap scan targetUrl: 'http://example.com'
               }
-            }
+
         }
+      }
     }
-}
+  }
+
 
 //         stage('Test') {
 //             steps {
