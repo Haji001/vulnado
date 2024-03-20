@@ -31,5 +31,15 @@ pipeline {
         }
       }
     }
+    stage ('maven build') {
+      steps {
+        sh 'mvn package'
+      }
+    }
+    stage('snyk test') {
+      steps {
+        sh 'snyk test'
+      }
+    }
   }
 }
