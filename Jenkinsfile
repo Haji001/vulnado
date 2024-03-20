@@ -24,43 +24,12 @@ pipeline {
         ])
       }
     }
-
-    stage('Run DAST Scan with ZAP') {
+    stage('check for versions') {
       steps {
         script {
-          zap scan targetUrl: 'http://example.com' // Corrected line
+          sh 'docker --version'
         }
       }
     }
-
-    // Uncomment and configure these stages as needed
-
-    // **Testing stage (commented out)**
-    /*
-    stage('Testing') {
-      steps {
-        withSonarQubeEnv(installationName: 'SonarQube Host', credentialsId: 'SONAR_TOKEN') {
-          sh 'mvn clean verify sonar:sonar \
-              -Dsonar.projectKey=vulnado \
-              -Dsonar.projectName="vulnado" \
-              -Dsonar.login=$SONAR_TOKEN \
-              -Dsonar.host.url=http://localhost:9000'
-        }
-      }
-    }
-    */
-
-    // **Build Image stage (commented out)**
-    /*
-    stage('Build Image') {
-      steps {
-        withDockerRegistry([credentialsId: "dockerlogin", url: "https://hub.docker.com/repository/docker/ant0021/testv1/general"]) {
-          script {
-            sh 'docker build -t ant0021/testv1:tag321'
-          }
-        }
-      }
-    }
-    */
   }
 }
