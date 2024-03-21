@@ -27,18 +27,8 @@ pipeline {
     stage('check for versions') {
       steps {
         script {
-          sh 'docker --version'
+          app = docker.build('vulimage/test')
         }
-      }
-    }
-    stage ('maven build') {
-      steps {
-        sh 'mvn package'
-      }
-    }
-    stage('snyk test') {
-      steps {
-        sh 'snyk test'
       }
     }
   }
