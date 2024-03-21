@@ -31,5 +31,18 @@ pipeline {
         }
       }
     }
+    stage('Run container scan') {
+      steps{
+        withCredentials([string(credentialsID: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+          script {
+            try {
+              sh "snyk containter test vulimage/test"
+            }  catch (err) {
+              echo err.getMessage()
+            }
+          }
+        }
+      }
+    }
   }
 }
