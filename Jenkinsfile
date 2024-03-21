@@ -37,7 +37,7 @@ pipeline {
         withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
           script {
             try {
-              sh "snyk containter test vulimage/test"
+              sh "snyk containter test vulimage"
             }  catch (err) {
               echo err.getMessage()
             }
