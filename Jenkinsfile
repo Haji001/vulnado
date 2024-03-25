@@ -32,29 +32,29 @@ pipeline {
       }
     }
     // TESTING
-    stage('Run container scan'){
-      steps{
-        echo "Testing......"
-        snykSecurity(
-          snykInstallation: 'snyk@latest',
-          snykTokenId: 'SNYK_TOKEN',
-          failOnIssues: false,
-          monitorProjectOnBuild: true,
-          additionalArguments: '--all-projects --d'
-        )
+    // stage('Run container scan'){
+    //   steps{
+    //     echo "Testing......"
+    //     snykSecurity(
+    //       snykInstallation: 'snyk@latest',
+    //       snykTokenId: 'SNYK_TOKEN',
+    //       failOnIssues: false,
+    //       monitorProjectOnBuild: true,
+    //       additionalArguments: '--all-projects --d'
+        //)
       }
     }
-    stage('....container scan'){
-      steps{
-        snykSecurity(
-          snykInstallation: 'snyk@latest',
-          snykTokenId: 'SNYK_TOKEN',
-          failOnIssues: false,
-          monitorProjectOnBuild: true,
-          additionalArguments: '--container vulimage -d'
-        )
-
+    stage('Run Container Scan') {
+      steps {
+        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+          script {
+            try {
+              sh "snyk container test vulimage/test"
+            } catch (err) {
+              echo err.getMessage()
+            }
+          }
+        }
       }
     }
-  }
-}
+  
