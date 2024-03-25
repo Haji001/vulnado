@@ -31,22 +31,5 @@ pipeline {
         }
       }
     }
-    // TESTING
-    // stage('Run container scan'){
-    //   steps{
-    //     echo "Testing......"
-    //     snykSecurity(
-    //       snykInstallation: 'snyk@latest',
-    //       snykTokenId: 'SNYK_TOKEN',
-    //       failOnIssues: false,
-    //       monitorProjectOnBuild: true,
-    //       additionalArguments: '--all-projects --d'
-        //)
-      }
-    }
-    stage('Run Container Scan') {
-      steps{
-          sh 'snyk container test vulimage/test'
-        }
-      }
+
     
