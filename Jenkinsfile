@@ -38,7 +38,7 @@ pipeline {
         snykSecurity(
           snykInstallation: 'snyk@latest',
           snykTokenId: 'SNYK_TOKEN',
-          failonIssues: false,
+          failOnIssues: false,
           monitorProjectOnBuild: true,
           additionalArguments: '--all-projects --d'
         )
@@ -49,7 +49,7 @@ pipeline {
         snykSecurity(
           snykInstallation: 'snyk@latest',
           snykTokenId: 'SNYK_TOKEN',
-          failonIssues: false,
+          failOnIssues: false,
           monitorProjectOnBuild: true,
           additionalArguments: '--container vulimage/ -d'
         )
