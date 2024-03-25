@@ -32,17 +32,28 @@ pipeline {
       }
     }
     // TESTING
-    stage('Run container scan') {
+    stage('Run container scan'){
       steps{
-        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-          script {
-            try {
-              sh "snyk container test vulimage"
-            }  catch (err) {
-              echo err.getMessage()
-            }
-          }
-        }
+        echo "Testing......"
+        snykSecurity(
+          snykInstallation: 'snyk@latest',
+          snykTokenId: 'SNYK_TOKEN',
+          failonIssues: false,
+          monitorProjectOnBuild: true,
+          additionalArguments: '--all-projects --d'
+        )
+      }
+    }
+    stage('....container scan'){
+      steps{
+        snykSecurity(
+          snykInstallation: 'snyk@latest',
+          snykTokenId: 'SNYK_TOKEN',
+          failonIssues: false,
+          monitorProjectOnBuild: true,
+          additionalArguments: '--container vulimage/ -d'
+        )
+
       }
     }
   }
