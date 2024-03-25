@@ -46,9 +46,7 @@ pipeline {
     }
     stage('Run Container Scan') {
       steps{
-        script{
-          sh 'echo testing.....'
           sh 'snyk container test vulimage/test'
         }
       }
-    }
+    
