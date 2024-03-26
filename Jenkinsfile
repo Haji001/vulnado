@@ -36,7 +36,7 @@ pipeline {
       steps{
         snykSecurity(
           snykInstallation: 'snyk@latest',
-          snykTokenID: 'SNYK_TOKEN',
+          snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: true,
           additionalArguments: '--container vulimage -debug'
