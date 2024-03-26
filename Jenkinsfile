@@ -31,22 +31,30 @@ pipeline {
         }
       }
     }
-    stage('scan'){
+    stage('checking for container scans...'){
       steps{
         script{
-          snykSecurity severity: 'critical', snykInstallation: 'snyk@latest', snykTokenId: 'SNYK_TOKEN'
-          def variable = sh(
-            script: 'snyk container test vulimage/test --severity-threshold=critical',
-            returnStatus: true
-          )
-            echo "error code = ${variable}"
-            if (variable != 0) {
-              echo "Alert for vulnerability found"
-            }
+          sh "snyk container test vulimage/test"
         }
       }
     }
   }
+  //   stage('scan'){
+  //     steps{
+  //       script{
+  //         snykSecurity severity: 'critical', snykInstallation: 'snyk@latest', snykTokenId: 'SNYK_TOKEN'
+  //         def variable = sh(
+  //           script: 'snyk container test vulimage/test --severity-threshold=critical',
+  //           returnStatus: true
+  //         )
+  //           echo "error code = ${variable}"
+  //           if (variable != 0) {
+  //             echo "Alert for vulnerability found"
+  //           }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
     
