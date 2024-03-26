@@ -28,7 +28,7 @@ pipeline {
     stage('check for versions') {
       steps {
         script {
-          app = docker.build('vulimage/latest')
+          app = docker.build('vulimage')
         }
       }
     }
@@ -39,7 +39,7 @@ pipeline {
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: true,
-          additionalArguments: '--container debian -debug'
+          additionalArguments: '--container vulimage -debug'
 
         )
       }
