@@ -44,6 +44,11 @@ pipeline {
         )
       }
     }
+    stage('images'){
+      steps{
+        sh 'docker images'
+      }
+    }
   }
 }
 
