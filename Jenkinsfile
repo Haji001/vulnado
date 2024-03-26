@@ -28,19 +28,22 @@ pipeline {
     stage('check for versions') {
       steps {
         script {
-          app = docker.build('vulimage/test')
+          app = docker.build('vulimage/latest')
         }
       }
     }
+    stage('Container scanner'){
+      steps{
+        snykSecurity(
+          snykInstallation: 'snyk@latest',
+          snykTokenID: 'SNYK_TOKEN',
+          failOnIssues: false,
+          monitorProjectOnBuild: true,
+          additionalArguments: '--container vulimage -debug'
 
-    stage('checking for container scans...') {
-      steps {
-        script {
-          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SNYK_TOKEN', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-            sh "snyk container test vulimage/test"
-          }
-        }
+        )
       }
     }
   }
 }
+
