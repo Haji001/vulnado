@@ -33,8 +33,9 @@ pipeline {
     }
     stage('checking for container scans...'){
       steps{
-        script{
-          sh "snyk container test vulimage/test"
+        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')])
+          script{
+            sh "snyk container test vulimage/test"
         }
       }
     }
