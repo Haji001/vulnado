@@ -36,7 +36,7 @@ pipeline {
     stage('checking for container scans...') {
       steps {
         script {
-          withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SNYK_TOKEN', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             sh "snyk container test vulimage/test"
           }
         }
