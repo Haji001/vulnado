@@ -50,5 +50,18 @@ pipeline {
         )
       }
     }
+    stage('SCA Analysis....'){
+      steps{
+        script{
+          snykSecurity(
+            snykInstallation: 'snyk@latest',
+            snykTokenId: 'SNYK_TOKEN',
+            failOnIssues: true,
+            targetFile: 'pom.xml',
+            additionalArguments: '--all-projects'
+          )
+        }
+      }
+    }
   }
 }
