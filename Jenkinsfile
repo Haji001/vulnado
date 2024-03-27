@@ -58,7 +58,7 @@ pipeline {
             snykTokenId: 'SNYK_TOKEN',
             failOnIssues: true,
             targetFile: 'pom.xml',
-            additionalArguments: '--all-projects'
+            //additionalArguments: '--all-projects'
           )
         }
       }
