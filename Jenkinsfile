@@ -25,14 +25,20 @@ pipeline {
       }
     }
 
-    stage('check for versions') {
+    stage('Maven Build'){
+      steps{
+        sh 'mvn clean install'
+      }
+    }
+
+    stage('Build the Image') {
       steps {
         script {
           app = docker.build('vulimage')
         }
       }
     }
-    stage('Container scanner'){
+    stage('Scanning Container Image '){
       steps{
         snykSecurity(
           snykInstallation: 'snyk@latest',
@@ -44,11 +50,5 @@ pipeline {
         )
       }
     }
-    stage('images'){
-      steps{
-        sh 'docker images'
-      }
-    }
   }
 }
-
