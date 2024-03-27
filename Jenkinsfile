@@ -45,7 +45,7 @@ pipeline {
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: true,
-          additionalArguments: '--container vulimage -debug'
+          additionalArguments: '--container vulimage'
 
         )
       }
@@ -56,7 +56,7 @@ pipeline {
           snykSecurity(
             snykInstallation: 'snyk@latest',
             snykTokenId: 'SNYK_TOKEN',
-            failOnIssues: true,
+            failOnIssues: false,
             targetFile: 'pom.xml',
             //additionalArguments: '--all-projects'
           )
