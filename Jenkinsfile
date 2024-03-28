@@ -44,8 +44,8 @@ pipeline {
           snykInstallation: 'snyk@latest',
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
-          monitorProjectOnBuild: false,
-          additionalArguments: '--container vulimage -debug'
+          monitorProjectOnBuild: true,
+          additionalArguments: '--container vulimage'
 
         )
       }
@@ -56,7 +56,7 @@ pipeline {
           snykSecurity(
             snykInstallation: 'snyk@latest',
             snykTokenId: 'SNYK_TOKEN',
-            failOnIssues: false,
+            failOnIssues: true,
             targetFile: 'pom.xml',
             //additionalArguments: '--all-projects'
           )
@@ -70,6 +70,7 @@ pipeline {
     }
   }
 }
+// SNYK IaC SCANNING IS TAKING LONGER THAN EXPECTED. 
 //     stage('IaC Scanning....'){
 //       steps{
 //         script{
