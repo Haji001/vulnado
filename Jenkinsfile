@@ -44,7 +44,7 @@ pipeline {
           snykInstallation: 'snyk@latest',
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
-          monitorProjectOnBuild: true,
+          monitorProjectOnBuild: false,
           additionalArguments: '--container vulimage'
 
         )
