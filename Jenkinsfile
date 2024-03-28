@@ -76,7 +76,7 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
-            sh 'ggshield secret scan path .'
+            sh 'ggshield secret scan path . --recursive'
           }
         }
       }
