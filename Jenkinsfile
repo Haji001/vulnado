@@ -63,18 +63,25 @@ pipeline {
         }
       }
     }
-    stage('IaC Scanning....'){
+    stage('Iac Scanning'){
       steps{
-        script{
-          snykSecurity(
-            snykInstallation: 'snyk@latest',
-            snykTokenId: 'SNYK_TOKEN',
-            failOnIssues: false,
-            targetFile: 'main.tf',
-            additionalArguments: '--command=iac test -debug'
-          )
-        }
+        sh 'checkov -s -f main.tf'
       }
     }
   }
 }
+//     stage('IaC Scanning....'){
+//       steps{
+//         script{
+//           snykSecurity(
+//             snykInstallation: 'snyk@latest',
+//             snykTokenId: 'SNYK_TOKEN',
+//             failOnIssues: false,
+//             targetFile: 'main.tf',
+//             additionalArguments: '--command=iac test -debug'
+//           )
+//         }
+//       }
+//     }
+//   }
+// }
