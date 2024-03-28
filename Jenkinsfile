@@ -63,5 +63,17 @@ pipeline {
         }
       }
     }
+    stage('IaC Scanning....'){
+      steps{
+        script{
+          snykSecurity(
+            snykInstallation: 'snyk@latest',
+            snykTokenId: 'SNYK_TOKEN',
+            failOnIssues: false,
+            targetFile: 'main.tf'
+          )
+        }
+      }
+    }
   }
 }
