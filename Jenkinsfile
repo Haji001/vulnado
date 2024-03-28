@@ -70,7 +70,8 @@ pipeline {
             snykInstallation: 'snyk@latest',
             snykTokenId: 'SNYK_TOKEN',
             failOnIssues: false,
-            targetFile: 'main.tf'
+            targetFile: 'main.tf',
+            additionalArguments: '--command=iac test'
           )
         }
       }
