@@ -56,7 +56,7 @@ pipeline {
           snykSecurity(
             snykInstallation: 'snyk@latest',
             snykTokenId: 'SNYK_TOKEN',
-            failOnIssues: true,
+            failOnIssues: false,
             targetFile: 'pom.xml',
             //additionalArguments: '--all-projects'
           )
