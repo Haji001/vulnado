@@ -34,7 +34,7 @@ pipeline {
     stage('Build the Image') {
       steps {
         script {
-          app = docker.build('vulimage')
+          app = docker.build('dirtyimage')
         }
       }
     }
@@ -76,7 +76,7 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
-            sh 'ggshield secret scan path . --recursive'
+            sh 'ggshield secret scan path . --recursive --yes'
           }
         }
       }
