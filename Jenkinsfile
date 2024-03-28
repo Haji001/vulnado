@@ -76,7 +76,7 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
-            sh 'ggshield secret scan https://github.com/Haji001/vulnado.git'
+            sh 'ggshield secret scan path .'
           }
         }
       }
