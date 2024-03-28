@@ -45,7 +45,7 @@ pipeline {
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: false,
-          additionalArguments: '--container vulimage'
+          additionalArguments: '--container vulimage -debug'
 
         )
       }
@@ -71,7 +71,7 @@ pipeline {
             snykTokenId: 'SNYK_TOKEN',
             failOnIssues: false,
             targetFile: 'main.tf',
-            additionalArguments: '--command=iac test'
+            additionalArguments: '--command=iac test -debug'
           )
         }
       }
