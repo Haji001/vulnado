@@ -38,6 +38,7 @@ pipeline {
         }
       }
     }
+    
     stage('Scanning Container Image '){
       steps{
         snykSecurity(
@@ -46,10 +47,10 @@ pipeline {
           failOnIssues: false,
           monitorProjectOnBuild: true,
           additionalArguments: '--container vulimage'
-
         )
       }
     }
+    
     stage('SCA Analysis....'){
       steps{
         script{
@@ -63,26 +64,24 @@ pipeline {
         }
       }
     }
+    
     stage('Iac Scanning'){
       steps{
         sh 'checkov -s -f main.tf'
       }
     }
+    
+    // Adding the GitGuardian scan stage
+    stage('GitGuardian Scan') {
+      agent {
+        docker { image 'gitguardian/ggshield:latest' }
+      }
+      environment {
+        GITGUARDIAN_API_KEY = credentials('GGSHIELD_TOKEN')
+      }
+      steps {
+        sh 'ggshield secret scan ci'
+      }
+    }
   }
 }
-// SNYK IaC SCANNING IS TAKING LONGER THAN EXPECTED. 
-//     stage('IaC Scanning....'){
-//       steps{
-//         script{
-//           snykSecurity(
-//             snykInstallation: 'snyk@latest',
-//             snykTokenId: 'SNYK_TOKEN',
-//             failOnIssues: false,
-//             targetFile: 'main.tf',
-//             additionalArguments: '--command=iac test -debug'
-//           )
-//         }
-//       }
-//     }
-//   }
-// }
