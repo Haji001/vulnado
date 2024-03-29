@@ -46,7 +46,7 @@ pipeline {
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: true,
-          additionalArguments: '--container vulimage'
+          additionalArguments: '--container dirtyimage'
         )
       }
     }
