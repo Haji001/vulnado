@@ -24,10 +24,13 @@ pipeline {
         ])
       }
     }
-    stage('Secret Scanning....'){
-      steps{
-        script{
-          sh 'trivy fs --secret .'
+
+    stage('GitGuardian Scan') {
+      steps {
+        script {
+          withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
+            sh 'ggshield secret scan path . --recursive --yes'
+          }
         }
       }
     }
