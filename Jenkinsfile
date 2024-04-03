@@ -24,6 +24,13 @@ pipeline {
         ])
       }
     }
+    stage('Secret Scanning....'){
+      steps{
+        script{
+          sh 'trivy fs --security-checks secret .'
+        }
+      }
+    }
 
     stage('Maven Build'){
       steps{
@@ -39,7 +46,7 @@ pipeline {
       }
     }
     
-    stage('Scanning Container Image '){
+    stage('Scanning Container Image...'){
       steps{
         snykSecurity(
           snykInstallation: 'snyk@latest',
@@ -59,7 +66,6 @@ pipeline {
             snykTokenId: 'SNYK_TOKEN',
             failOnIssues: false,
             targetFile: 'pom.xml',
-            //additionalArguments: '--all-projects'
           )
         }
       }
@@ -70,16 +76,18 @@ pipeline {
         sh 'checkov -s -f main.tf'
       }
     }
-    
-    // Adding the GitGuardian scan stage
-    stage('GitGuardian Scan') {
-      steps {
-        script {
-          withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
-            sh 'ggshield secret scan path . --recursive --yes'
-          }
-        }
-      }
-    }
   }
 }
+    
+//     // Adding the GitGuardian scan stage
+//     stage('GitGuardian Scan') {
+//       steps {
+//         script {
+//           withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
+//             sh 'ggshield secret scan path . --recursive --yes'
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
