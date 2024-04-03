@@ -27,7 +27,7 @@ pipeline {
     stage('Secret Scanning....'){
       steps{
         script{
-          sh 'trivy fs --security-checks secret .'
+          sh 'trivy fs --secret .'
         }
       }
     }
