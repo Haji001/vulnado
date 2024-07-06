@@ -67,7 +67,7 @@ pipeline {
           snykTokenId: 'SNYK_TOKEN',
           failOnIssues: false,
           monitorProjectOnBuild: true,
-          additionalArguments: '--container dirtyimage'
+          additionalArguments: '--container dirtyimage/jenkins'
         )
       }
     }
