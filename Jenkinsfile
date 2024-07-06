@@ -1,6 +1,9 @@
 
 
 pipeline {
+  environment { 
+    imagename = 'dirtyimage/jenkins'
+  }
   agent any
 
   tools {
@@ -52,7 +55,7 @@ pipeline {
     stage('Build the Image') {
       steps {
         script {
-          sh 'docker images -a' // ltesi
+          dockerImage = docker.build "${imagename}:latest"
         }
       }
     }
