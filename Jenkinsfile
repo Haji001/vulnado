@@ -52,7 +52,7 @@ pipeline {
     stage('Build the Image') {
       steps {
         script {
-          sh 'docker build -t dirtyimage .'
+          sh 'docker build -t dirtyimage .' // ltesi
         }
       }
     }
