@@ -1,3 +1,5 @@
+
+
 pipeline {
   agent any
 
@@ -50,7 +52,7 @@ pipeline {
     stage('Build the Image') {
       steps {
         script {
-          app = docker.build('dirtyimage')
+          sh 'docker build -t dirtyimage .'
         }
       }
     }
@@ -88,15 +90,3 @@ pipeline {
   }
 }
     
-//     // Adding the GitGuardian scan stage
-//     stage('GitGuardian Scan') {
-//       steps {
-//         script {
-//           withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
-//             sh 'ggshield secret scan path . --recursive --yes'
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
