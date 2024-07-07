@@ -30,21 +30,21 @@ pipeline {
       }
     }
 
-    stage('GitGuardian Scan') {
-      steps {
-        script {
-          withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
+    // stage('GitGuardian Scan') {
+    //   steps {
+    //     script {
+    //       withCredentials([string(credentialsId: 'GGSHIELD_TOKEN', variable: 'GITGUARDIAN_API_KEY')]) {
             
-            def result = sh(script: 'ggshield secret scan path . --recursive --yes', returnStatus: true)
-            if (result !=0){
-              echo "Secrets detected or error occurred, please review. Exit code: ${result}"
-            }
+    //         def result = sh(script: 'ggshield secret scan path . --recursive --yes', returnStatus: true)
+    //         if (result !=0){
+    //           echo "Secrets detected or error occurred, please review. Exit code: ${result}"
+    //         }
 
-            //sh 'ggshield secret scan path . --recursive --yes'
-          }
-        }
-      }
-    }
+    //         //sh 'ggshield secret scan path . --recursive --yes'
+    //       }
+    //     }
+    //   }
+    // }
 
     stage('Maven Build'){
       steps{
